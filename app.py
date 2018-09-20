@@ -18,7 +18,9 @@ def webhook():
     # print(res)
     #r = make_response(res)
     #r.headers['Content-Type'] = 'application/json'
-	return json.dumps(req)
+	return jsonify({
+		"fulfillmentText": "I cannot do that yet!"
+		})
 
 if __name__ == '__main__':
 	app.run()
