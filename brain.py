@@ -58,7 +58,7 @@ def getResponse(req):
 				if "_" not in item:
 					menu_items = menu_items + ", " + item.strip()
 			menu_items = menu_items[2:len(menu_items)]
-			return text + menu_items + " for " + queryString + "."
+			return text + menu_items + "."
 
 
 def parseMenu(day, meal):
