@@ -4,7 +4,7 @@
 # A webhook for NIIT University Mess
 # Actions App on Google Assistant
 
-from flask import Flask, redirect, jsonify, request
+from flask import Flask, redirect, jsonify, request, render_template
 from flask_cors import CORS
 import json
 from brain import *
@@ -19,6 +19,10 @@ def webhook():
 	return jsonify({
 		"fulfillmentText": response
 		})
+
+@app.route('/analytics')
+def analytics():
+	return render_template('analytics.html')
 
 if __name__ == '__main__':
 	app.run()

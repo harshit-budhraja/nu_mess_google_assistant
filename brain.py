@@ -22,6 +22,7 @@ MEALS = ["breakfast", "lunch", "hi-tea", "dinner"]
 MENU_URL = "https://raw.githubusercontent.com/harshitbudhraja/harshitbudhraja.github.io/master/data/DH.json"
 
 def getResponse(req):
+	incrementAnalytics()
 	parameters = req.get("queryResult").get("parameters")
 	date = parameters.get("date")
 	meal = parameters.get("meal")
@@ -87,4 +88,7 @@ def parseMenu(day, meal):
 	elif r.status_code == 404:
 		# the menu is not found on the url
 		return {}
+
+def incrementAnalytics():
+	r = requests.get('https://nu-mess-actions-webhook.herokuapp.com/analytics')
 
