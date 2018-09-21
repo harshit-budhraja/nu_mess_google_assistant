@@ -52,13 +52,13 @@ def getResponse(req):
 		if not menu:
 			return ("I'm sorry but I could not find out the menu you asked for. I've contacted Harshit about this problem of yours and he'll probably look into it soon.") 
 		else:
-			text = "The mess is serving "
+			text = "The mess serves "
 			menu_items = ""
 			for item in menu:
 				if "_" not in item:
 					menu_items = menu_items + ", " + item.strip()
 			menu_items = menu_items[2:len(menu_items)]
-			return text + menu_items + "."
+			return text + menu_items + " for " + meal + " every " + day + "."
 
 
 def parseMenu(day, meal):
