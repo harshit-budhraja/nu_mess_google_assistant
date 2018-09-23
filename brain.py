@@ -17,6 +17,7 @@ import requests
 import json
 import datetime
 from isodate import *
+from responses import *
 
 MEALS = ["breakfast", "lunch", "hi-tea", "dinner"]
 MENU_URL = "https://raw.githubusercontent.com/harshitbudhraja/harshitbudhraja.github.io/master/data/DH.json"
@@ -29,7 +30,7 @@ def getResponse(req):
 	queryString = req.get("queryResult").get("queryText")
 	if meal not in MEALS:
 		# the meal parameter in request is not a valid meal
-		return "I didn't get that, could you say it again?"
+		return generateResponse(MEAL_PARAM_404_RES)
 	else:
 		# the meal parameter in the request is a valid meal
 		# can proceed with further processing
@@ -50,8 +51,10 @@ def getResponse(req):
 		elif d == 6:
 			day = "Sunday"
 		menu = parseMenu(day, meal)
-		if not menu:
-			return ("I'm sorry but I could not find out the menu you asked for. I've contacted Harshit about this problem of yours and he'll probably look into it soon.") 
+		if menu == "parse_error":
+			return generateResponse(MENU_PARSE_ERROR_RES)
+		elif menu == "404_error":
+			return generateResponse(MENU_404_ERROR_RES)
 		else:
 			text = "The mess serves "
 			menu_items = ""
@@ -68,7 +71,6 @@ def parseMenu(day, meal):
 	mm = list()
 	if r.status_code == 200:
 		# the menu is found on the given url
-		print(r.text)
 		menu = json.loads(r.text)
 		ret = list()
 		for item in menu["Sheet1"]:
@@ -82,12 +84,11 @@ def parseMenu(day, meal):
 		elif meal == "dinner":
 			ret = mm[15:21]
 		else:
-			ret = {}
-		print(ret)
+			ret = "parse_error"
 		return ret
 	elif r.status_code == 404:
 		# the menu is not found on the url
-		return {}
+		return "404_error"
 
 def incrementAnalytics():
 	r = requests.get('https://nu-mess-actions-webhook.herokuapp.com/analytics')
