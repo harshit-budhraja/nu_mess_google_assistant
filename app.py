@@ -17,9 +17,11 @@ def webhook():
 	req = request.get_json(silent=True, force=True)
 	print(logIncoming(req))
 	response = getResponse(req)
-	res = '{"fulfillmentText":' + response + '}'
+	res = {
+	"fulfillmentText": response 
+	}
 	#print(logOutgoing(res))
-	return res
+	return jsonify(res)
 
 if __name__ == '__main__':
 	app.run()
