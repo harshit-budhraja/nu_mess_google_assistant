@@ -19,11 +19,11 @@ import datetime
 from isodate import *
 from responses import *
 
+db_api_key = 'wmAphKS81eprJ6FTgjFeDvw2G22GICQ94D3z29UG'
 MEALS = ["breakfast", "lunch", "hi-tea", "dinner"]
 MENU_URL = "https://raw.githubusercontent.com/harshitbudhraja/harshitbudhraja.github.io/master/data/DH.json"
 
 def getResponse(req):
-	incrementAnalytics()
 	parameters = req.get("queryResult").get("parameters")
 	date = parameters.get("date")
 	meal = parameters.get("meal")
@@ -90,6 +90,12 @@ def parseMenu(day, meal):
 		# the menu is not found on the url
 		return "404_error"
 
-def incrementAnalytics():
-	r = requests.get('https://nu-mess-actions-webhook.herokuapp.com/analytics')
+def logIncoming(req):
+	headers = {'Content-Type': 'application/json'}
+	r = requests.post('https://tracker.dashbot.io/track?platform=google&v=10.1.1-rest&type=incoming&apiKey=' + db_api_key, headers=headers, data=json.dumps(req))
+	return r.text
 
+def logOutgoing(res):
+	header = {'Content-Type': 'application/json'}
+	r = requests.post('https://tracker.dashbot.io/track?platform=google&v=10.1.1-rest&type=outgoing&apiKey=' + db_api_key, headers=header, data=json.dumps(res))
+	return r.text

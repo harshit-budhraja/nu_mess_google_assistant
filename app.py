@@ -15,14 +15,11 @@ CORS(app)
 @app.route('/webhook', methods=['POST'])
 def webhook():
 	req = request.get_json(silent=True, force=True)
+	print(logIncoming(req))
 	response = getResponse(req)
-	return jsonify({
-		"fulfillmentText": response
-		})
-
-@app.route('/analytics')
-def analytics():
-	return render_template('analytics.html')
+	res = '{"fulfillmentText":' + response + '}'
+	#print(logOutgoing(res))
+	return res
 
 if __name__ == '__main__':
 	app.run()
