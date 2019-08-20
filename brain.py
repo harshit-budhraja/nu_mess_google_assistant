@@ -21,7 +21,7 @@ from responses import *
 
 db_api_key = 'wmAphKS81eprJ6FTgjFeDvw2G22GICQ94D3z29UG'
 MEALS = ["breakfast", "lunch", "hi-tea", "dinner"]
-MENU_URL = "https://raw.githubusercontent.com/harshitbudhraja/old_harshitbudhraja.github.io/master/data/DH.json"
+MENU_URL = "https://harshitbudhraja.github.io/old_harshitbudhraja.github.io/data/DH.json"
 
 def getResponse(req):
 	parameters = req.get("queryResult").get("parameters")
