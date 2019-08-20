@@ -16,6 +16,7 @@ CORS(app)
 def webhook():
 	req = request.get_json(silent=True, force=True)
 	print(logIncoming(req))
+	print(req)
 	response = getResponse(req)
 	res = {
 	"fulfillmentText": response 
