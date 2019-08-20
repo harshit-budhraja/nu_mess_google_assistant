@@ -68,6 +68,8 @@ def getResponse(req):
 def parseMenu(day, meal):
 	print("parseMenu() Query: " + day + " - " + meal)
 	r = requests.get(MENU_URL)
+	print(r)
+	print(r.status_code)
 	mm = list()
 	if r.status_code == 200:
 		# the menu is found on the given url
