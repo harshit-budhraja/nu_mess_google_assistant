@@ -1,0 +1,22 @@
+{
+    "express": {
+        "port": 1301
+    },
+    "cache": {
+        "stdTTL": 3600,
+        "checkperiod": 120,
+        "deleteOnExpire": true
+    },
+    "routes": [
+        {
+            "method": "GET",
+            "route": "/menu",
+            "function": "menu"
+        },
+        {
+            "method": "GET",
+            "route": "/health",
+            "function": "health"
+        }
+    ]
+}

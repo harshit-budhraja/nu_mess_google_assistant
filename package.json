@@ -1,0 +1,42 @@
+{
+    "name": "nu_mess_google_assistant",
+    "version": "1.0.0",
+    "description": "Webhook to power the NIIT University Mess app on Google Assistant",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://harshit-budhraja@github.com/harshit-budhraja/nu_mess_google_assistant.git"
+    },
+    "keywords": [
+        "nu-mess",
+        "niituniversity",
+        "niit",
+        "university",
+        "mess",
+        "menu",
+        "google",
+        "assistant",
+        "google-assistant"
+    ],
+    "author": "Harshit Budhraja",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/harshit-budhraja/nu_mess_google_assistant/issues"
+    },
+    "homepage": "https://github.com/harshit-budhraja/nu_mess_google_assistant#readme",
+    "dependencies": {
+        "axios": "0.19.2",
+        "express": "4.17.1",
+        "http": "0.0.1-security",
+        "moment": "2.24.0",
+        "moment-timezone": "0.5.28",
+        "node-cache": "5.1.0"
+    },
+    "engines": {
+        "node": "10.16.3"
+    }
+}
