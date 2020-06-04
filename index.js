@@ -14,7 +14,7 @@ const initApp = async () => {
         const config = JSON.parse(fs.readFileSync('config.json'));
         if (config) console.log(`${functionTag}: Configurations loaded successfully from config.json`);
         global.config = config;
-        const expressPort = config.express.port;
+        const expressPort = process.env.PORT || config.express.port;
         if (!expressPort) throw new Error(`Cannot boot the app due to unspecified port`);
 
         /**
