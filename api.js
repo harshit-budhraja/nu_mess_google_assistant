@@ -6,6 +6,7 @@ const menu = async (req, res) => {
     
     const svc = new Service();
     const menu = await svc.getMenu(id);
+    if (!menu) return res.status(404).send({status: 404, message: `Menu not found for id: ${id}`});
     return res.status(200).send(menu);
 }
 

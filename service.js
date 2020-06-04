@@ -23,6 +23,7 @@ class Service {
         let menu = null;
         try {
             if (!messMenuTypeId) return null;
+            if (!this.permitted_menus.includes(messMenuTypeId)) throw new Error(`Unexpected value ${messMenuTypeId} for messMenuTypeId`);
             const start = moment();
             menu = this.cache.get(messMenuTypeId);
             if (!menu) {
