@@ -26,27 +26,28 @@ class Service {
          * Moment treats Sunday as the
          * start of the week, while my convention treats
          * Monday as that.
-         * SUN - 1 -> 6
-         * MON - 2 -> 0
-         * TUE - 3 -> 1
-         * WED - 4 -> 2
-         * THU - 5 -> 3
-         * FRI - 6 -> 4
-         * SAT - 7 -> 5
+         * SUN - 0 -> 6
+         * MON - 1 -> 0
+         * TUE - 2 -> 1
+         * WED - 3 -> 2
+         * THU - 4 -> 3
+         * FRI - 5 -> 4
+         * SAT - 6 -> 5
          * 
          * Doing this as an object map implementation
          * because I have something in mind about this.
          */
         const DAY_MAPPING = {
-            1: 6,
-            2: 0,
-            3: 1,
-            4: 2,
-            5: 3,
-            6: 4,
-            7: 5
+            0: 6,
+            1: 0,
+            2: 1,
+            3: 2,
+            4: 3,
+            5: 4,
+            6: 5
         };
         let day = DAY_MAPPING[moment(date).day()];
+        console.log(`${moment(date).day()} -> ${day}`);
         const menu = await this.getMenu("1");
         if (!menu) return null;
 
