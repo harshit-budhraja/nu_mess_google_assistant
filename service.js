@@ -23,11 +23,29 @@ class Service {
      */
     async getFulfillmentResponse(date, meal) {
         /**
-         * Subtracting 1 because moment treats Sunday as the
+         * Moment treats Sunday as the
          * start of the week, while my convention treats
          * Monday as that.
+         * SUN - 1 -> 7
+         * MON - 2 -> 0
+         * TUE - 3 -> 1
+         * WED - 4 -> 2
+         * THU - 5 -> 3
+         * FRI - 6 -> 4
+         * SAT - 7 -> 5
+         * SUN - 8 -> 6
          */
-        const day = moment(date).day() - 1;
+        const DAY_MAPPING = {
+            1: 7,
+            2: 0,
+            3: 1,
+            4: 2,
+            5: 3,
+            6: 4,
+            7: 5,
+            8: 6
+        };
+        let day = DAY_MAPPING[moment(date).day()];
         const menu = await this.getMenu("1");
         if (!menu) return null;
 
