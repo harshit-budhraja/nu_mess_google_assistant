@@ -1,5 +1,7 @@
 const axios = require('axios');
 const moment = require('moment-timezone');
+const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+const MEALS = ["breakfast", "lunch", "hi_tea", "dinner"];
 
 class Service {
     /**
@@ -9,6 +11,37 @@ class Service {
         this.API_URL = 'https://nucleus.niituniversity.in/WebApp/StudParentDashBoard/MessMenu.aspx/GetMessMenuStudentPortal';
         this.permitted_menus = ["1", "2"];
         this.cache = global.cache;
+    }
+
+    /**
+     * 
+     * @param {moment.Object} date
+     * @param {String} meal 
+     * 
+     * Fulfillment function for the Google Assistant
+     * Webhook.
+     */
+    async getFulfillmentResponse(date, meal) {
+        /**
+         * Subtracting 1 because moment treats Sunday as the
+         * start of the week, while my convention treats
+         * Monday as that.
+         */
+        const day = moment(date).day() - 1;
+        const menu = await this.getMenu("1");
+        if (!menu) return null;
+
+        const mealArray = menu[DAYS[day]][meal];
+        let retval = null
+        if (mealArray && mealArray.length > 0) {
+            retval = "The mess serves ";
+            for (let i = 0; i < mealArray.length; i++) {
+                if (i < mealArray.length - 1) retval += mealArray[i] + ", ";
+                else retval += mealArray[i] + " ";
+            }
+            retval += `for ${meal} every ${DAYS[day]}.`;
+        }
+        return retval;
     }
 
     /**
@@ -68,8 +101,6 @@ class Service {
                 menu.push(meals);
             });
 
-            const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
-            const MEALS = ["breakfast", "lunch", "hi_tea", "dinner"];
             for (let i = 0; i < DAYS.length; i++) {
                 let m = menu[i];
                 const myMeals = {};

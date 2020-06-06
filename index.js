@@ -2,6 +2,7 @@ const cache = {}, config = {};
 global.cache = cache;
 global.config = config;
 const express = require("express");
+const bodyParser = require('body-parser');
 const http = require('http');
 const fs = require('fs');
 const apiFunctions = require('./api');
@@ -27,6 +28,7 @@ const initApp = async () => {
         console.log(`${functionTag}: Initialised Cache Service`);
 
         const app = express();
+        app.use(bodyParser.json());
 
         config.routes.forEach(r => {
             if (!r.method) throw new Error(`Undefined HTTP Method for routing: ${JSON.stringify(r)}`);
@@ -44,6 +46,7 @@ const initApp = async () => {
             }
             console.log(`${functionTag}: Binding route [${r.method} ${r.route}] with function: ${r.function}`);
         });
+
         let server = http.createServer(app).listen(expressPort, () => {
             console.log(`${functionTag}: Api Initialised on port ${expressPort}`);
         });

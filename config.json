@@ -17,6 +17,37 @@
             "method": "GET",
             "route": "/health",
             "function": "health"
+        },
+        {
+            "method": "POST",
+            "route": "/webhook",
+            "function": "ga_webhook"
         }
-    ]
+    ],
+    "webhook_responses": {
+        "DATE_PARAM_404_RES": [
+            "I didn't get that, could you say it again?",
+            "I'm sorry I didn't catch that. Could you say it again?",
+            "I'm sorry, when for?",
+            "When for?",
+            "I'm sorry I was a bit occupied and missed what you just asked me. Could you maybe say it again?",
+            "I'm sorry I kind of missed what you just asked me. Could you maybe say it one more time?",
+            "I didn't really get your question. Was it about today or tomorrow?"
+        ],
+        "MEAL_PARAM_404_RES": [
+            "I didn't get that, could you say it again?",
+            "I'm sorry I didn't catch that. Could you say it again?",
+            "I'm sorry, what meal?",
+            "What meal?",
+            "I'm sorry I was a bit occupied and missed what you just asked me. Could you maybe say it again?",
+            "I'm sorry I kind of missed what you just asked me. Could you maybe say it one more time?",
+            "I didn't really get your question. Was it about breakfast, lunch, evening snacks or the dinner?"
+        ],
+        "MENU_ERROR_RES": [
+            "I'm sorry but I could not find out the menu you asked for. I've contacted Harshit about this problem of yours and he'll probably look into it soon.",
+            "I'm sorry but I'm unable to get to your requested menu right now. Please try again in a while.",
+            "I'm facing some problem giving you an answer about the menu. Please try again in a while.",
+            "The requested menu could not be retrieved because of some internal issue. Please try again in a while."
+        ]
+    }
 }
