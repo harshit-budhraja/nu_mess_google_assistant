@@ -7,6 +7,8 @@ const http = require('http');
 const fs = require('fs');
 const apiFunctions = require('./api');
 const NodeCache = require("node-cache");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const initApp = async () => {
     const functionTag = 'initApp';
@@ -29,6 +31,7 @@ const initApp = async () => {
 
         const app = express();
         app.use(bodyParser.json());
+        app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
         config.routes.forEach(r => {
             if (!r.method) throw new Error(`Undefined HTTP Method for routing: ${JSON.stringify(r)}`);

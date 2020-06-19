@@ -35,7 +35,8 @@
         "http": "0.0.1-security",
         "moment": "2.24.0",
         "moment-timezone": "0.5.28",
-        "node-cache": "5.1.0"
+        "node-cache": "5.1.0",
+        "swagger-ui-express": "4.1.4"
     },
     "engines": {
         "node": "10.16.3"

@@ -1,0 +1,104 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "version": "1.0.0",
+        "title": "NU Mess API",
+        "description": "Set of APIs to power the NIIT University Mess app on Google Assistant",
+        "contact": {
+            "name": "Harshit Budhraja",
+            "email": "harshit.budhraja@st.niituniversity.in",
+            "url": "https: //har-shit.xyz"
+        },
+        "_license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "tags": [
+        {
+            "name": "menu",
+            "description": "Menu being served in the given mess"
+        }
+    ],
+    "paths": {
+        "/menu": {
+            "get": {
+                "tags": [
+                    "menu"
+                ],
+                "summary": "Get menu by ID",
+                "description": "",
+                "operationId": "getMenu",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Which mess' menu do we want to fetch? (1 for Mess A; 2 for Mess B)",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "4XX": {
+                        "description": "4xx errors: 404, 422",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "examples": [
+                                                404,
+                                                422
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "examples": [
+                                                "Menu not found for id: 3",
+                                                "Missing mandatory paramter id in query."
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "<day>": {
+                                            "type": "object",
+                                            "properties": {
+                                                "<meal>": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "minItems": 1,
+                                                        "maxItems": 10
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Unexpected errors"
+                    }
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}
